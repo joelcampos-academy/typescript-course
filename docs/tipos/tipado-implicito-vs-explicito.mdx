@@ -1,0 +1,102 @@
+---
+sidebar_position: 2
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Formas de tipado
+
+Existen dos formas de indicar el tipo de datos. Se puede hacer de forma explícita (como hemos visto hasta ahora) o de forma implícita.
+
+## Tipando variables de forma implícita
+
+Cuando decimos que una variable (por poner un ejemplo) está tipada de forma implícita, nos referimos a que no le hemos indicado activamente el tipo. Ejemplo.
+
+<Tabs>
+    <TabItem value="implicito" label='Tipado implícito' default>
+    ```typescript
+        let edad = 20; // number
+        let nombre = "Puppycat"; // string
+        let esHumano = false; // boolean
+        let comidaFavorita = null; // null
+        let casa = undefined; // undefined
+        let identificador = new Symbol(nombre); // symbol
+    ```
+    </TabItem>
+    <TabItem value="explicito" label='Tipado explícito' default>
+    ```typescript
+        let edad: number = 20;
+        let nombre: string = "Puppycat";
+        let esHumano: boolean = false;
+        let comidaFavorita: null = null;
+        let casa: undefined = undefined;
+        let identificador: symbol = new Symbol(nombre);
+    ```
+    </TabItem>
+</Tabs>
+
+Aunque no hemos indicado ningún tipo de datos, las variables infieren el tipo según el valor que le hemos asignado. Esto puede parecer confuso, ya que acabamos teniendo un snippet de código completamente idñentico a un snippet de Javascript.
+Veamos un ejemplo en el que tiene sentido:
+
+```typescript
+const num1 = 2; // number
+const num2 = 4; // number
+
+function sumar(n1: number, n2: number): number {
+    return n1 + n2;
+}
+
+const resultado = sumar(num1, num2); // number
+```
+
+En este ejemplo hemos visto una función que toma dos argumentos numéricos y devuelve el resultado. Los tipos de `num1` y `num2` se infieren a `number` dado que le proporcionamos un número.
+Luego, utilizamos la función que necesita dos números para calcular la suma. Como estamos invocando la función `sumar` con dos variables de tipo `number` (tal como la función espera) no se produce ningún error de tipado.
+
+Sin embargo, si cometiésemos el error al indicar un tipo diferente al esperado se produciría un error de tipado. Ejemplo:
+
+```typescript
+const num1 = "Bee"; // string (se infiere string en vez de number, que es lo que necesitaríamos)
+const num2 = 4; // number
+
+function sumar(n1: number, n2: number): number {
+    return n1 + n2;
+}
+
+// This will error
+const resultado = sumar(num1, num2); // number
+// La variable 'num1' indicará error de tipo ya que le estamos proporcionando un 'string' cuando esperaba un 'number'
+```
+
+## Tipando funciones de forma implícita
+
+El tipo de retorno de una función se puede tipar de forma implícita. Usando el ejemplo anterior, podemos simplemente eliminar el tipo de retorno ya que este se detectará de forma automática.
+
+```typescript
+function sumar(n1: number, n2: number) {
+    return n1 + n2; // Esto es number, ya que number + number = number. Por lo que se infiere que la función devolverá un número
+}
+
+const resultado = sumar(2, 2); // number
+```
+
+### Tipado en los argumentos
+
+Los argumentos de las funciones se suelen tipar explícitamente ya que no hay manera de detectar el tipo por el valor asignado. Sin embargo, en el caso de que indiquemos un valor por defecto si que podemos detectar el tipo implícitamente. Ejemplo:
+
+<Tabs>
+    <TabItem value="implicito" label='Tipado implícito' default>
+    ```typescript
+    function sumar(num1: number, num2 = 0) {
+        return num1 + num2;
+    }
+    ```
+    </TabItem>
+    <TabItem value="explicito" label='Tipado explícito' default>
+    ```typescript
+    function sumar(num1: number, num2: number = 0) {
+        return num1 + num2;
+    }
+    ```
+    </TabItem>
+</Tabs>

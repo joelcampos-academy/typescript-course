@@ -95,6 +95,12 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      magicComments: [
+        {
+          className: "code-block-error-line",
+          line: "This will error",
+        },
+      ],
     },
   } satisfies Preset.ThemeConfig,
 };

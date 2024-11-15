@@ -1,0 +1,78 @@
+---
+sidebar_position: 3
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Sintáxis básica
+
+Como hemos comentado, TS es igual que JS pero agregando la posibilidad de indicar los tipos de datos. A continuación vamos a conocer las bases de la sintaxis de TS.
+
+## Definición de tipos
+
+### Variables
+
+Las variables se definen igual que en JS (let, var, const) a diferencia de que podemos indicar el tipo de datos de la misma. Para hacerlo simplemente agregamos ":" después del nombre de la variable seguido del tipo de datos que queremos. Ejemplo:
+
+```typescript
+let contador: number = 0;
+```
+
+En este ejemplo estamos definiendo una variable de tipo número. Lo mismo aplica tanto para las variables `var` y `const`.
+
+```typescript
+var variable1: number = 0;
+const variable2: number = 0;
+```
+
+### Parámetros de una función
+
+Las funciones que aceptan parámetros de entrada también pueden tener tipado. Por ejemplo, podemos tipar la siguiente función que acepta dos parámetros numéricos:
+
+```typescript
+function aggregateAndLog(num1: number, num2: number) {
+  console.log(num1 + num2);
+}
+```
+
+### Tipo de retorno
+
+Asímismo, las funciones que devuelven un valor pueden ser tipadas. El tipo de retorno se indica inmediatamente después de cerrar el paréntesis de los parámetros. Consulta el ejemplo:
+
+```typescript
+function aggregate(num1: number, num2: number): number {
+  return num1 + num2;
+}
+```
+
+### Tipado de propiedades
+
+Los objetos con propiedades pueden recibir tipado. Esto se hace igual que con las variables, es decir, el tipo se indica después del nombre de la propiedad. Ejemplo:
+
+<Tabs>
+  <TabItem value="basico" label='Básico' default>
+    ```typescript
+        class Gato {
+          edad: number; // <- Definimos la propiedad con su tipo
+
+          // Los argumentos del constructor se tipan igual que los de una función
+          constructor(edad: number) {
+            this.edad = edad;
+          }
+        }
+      ```
+  </TabItem>
+    <TabItem value="mods" label='Con modificadores'>
+    ```typescript
+        class Gato {
+          private readonly edad: number; // <- Definimos la propiedad con su tipo. Incluso con modificadores.
+
+          // Los argumentos del constructor se tipan igual que los de una función
+          constructor(edad: number) {
+            this.edad = edad;
+          }
+        }
+      ```
+  </TabItem>
+</Tabs>
